@@ -15,14 +15,14 @@ const transporter = nodemailer.createTransport(config);
 /**
  * 发送验证码
  * @param otherMail 目标邮箱地址
- * @param code 验证码
+ * @param content 邮件内容
  * */
-export const sendMail = (otherMail: string, code: string) => {
+export const sendMail = (otherMail: string, content: string) => {
   const mail = {
     from: `橙橙记账 <${process.env.USERMAIL}>`,
     subject: '验证码',
     to: otherMail,
-    text: `您得验证码是 ${code}`
+    html: content
   };
   transporter.sendMail(mail, (err, info) => {
     if (err) {
