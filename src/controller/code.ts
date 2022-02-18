@@ -1,6 +1,7 @@
 import {Context} from 'koa';
 import {getManager} from 'typeorm';
 import {Code} from '../entity/Code';
+import {User} from '../entity/User';
 import {sendMail} from '../utils/mailer';
 
 class CodeController {
@@ -9,8 +10,9 @@ class CodeController {
     const {email} = context.request.body as { email: string };
 
     const codeRepository = getManager().getRepository(Code);
-    const emailInDatabase = await codeRepository.findOne({where: {email}});
-    if (emailInDatabase) {
+    const userRepository = getManager().getRepository(User);
+    const user = await userRepository.findOne({where: {email}});
+    if (user) {
       context.throw(409, '该邮箱已被注册');
     }
     // 随机生成六位数验证码
