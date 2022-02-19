@@ -9,4 +9,13 @@ Content-Type: application/json
   "email": "burthuang@foxmail.com"
 }
 
+### 创建用户
+POST http://{{host}}/user/create
+Content-Type: application/json
 
+{
+  "email": "burthuang@foxmail.com",
+  "username": "admin",
+  "password": "123456",
+  "code": "710292"
+}

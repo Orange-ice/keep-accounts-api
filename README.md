@@ -7,3 +7,7 @@
 USERMAIL="发送邮件的邮箱地址"
 USERAUTH="开启POP3/SMTP/IMAP后得到的授权码"
 ```
+
+> 设置默认时区
+> [mysqld]
+> default-time-zone='+08:00'
