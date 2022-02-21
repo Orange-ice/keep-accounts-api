@@ -28,6 +28,21 @@ class UserController {
     context.body = rest;
   }
 
+  async login(context: Context) {
+    const {username, password} = context.request.body;
+    const userRepository = getManager().getRepository(User);
+    const _user = await userRepository.findOne({
+      where: {username},
+      select: ['password', 'username', 'avatarUrl', 'id', 'createdAt']
+    });
+    if (!_user) context.throw(400, '用户不存在');
+    if (password !== _user.password) context.throw(400, '用户名和密码不匹配');
+
+    const {password: pwd, ...user} = _user;
+    context.session!.user = user;
+    context.body = user;
+  }
+
   /**
    * 校验验证码
    * @param authCode 验证码

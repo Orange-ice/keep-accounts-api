@@ -19,5 +19,7 @@ export const AppRoutes = [
    * User
    * */
   // 创建用户
-  {path: `${prefixMap.user}/create`, method: 'post', action: UserController.createUser}
+  {path: `${prefixMap.user}/create`, method: 'post', action: UserController.createUser},
+  // 用户登录
+  {path: `${prefixMap.user}/login`, method: 'post', action: UserController.login},
 ];

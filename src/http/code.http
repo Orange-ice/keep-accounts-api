@@ -19,3 +19,12 @@ Content-Type: application/json
   "password": "123456",
   "code": "710292"
 }
+
+### 用户登录
+POST http://{{host}}/user/login
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "123456"
+}
