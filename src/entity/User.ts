@@ -1,4 +1,5 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Tag} from './Tag';
 
 @Entity()
 export class User {
@@ -19,4 +20,7 @@ export class User {
 
   @CreateDateColumn()
   createdAt: string;
+
+  @OneToMany(() => Tag, tag => tag.user)
+  tags: Tag[];
 }

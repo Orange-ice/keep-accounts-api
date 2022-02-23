@@ -18,7 +18,10 @@ createConnection().then(async connection => {
   app.use(session(sessionConfig, app));
 
   // 注册路由
-  AppRoutes.forEach(route => router[route.method as MethodType](route.path, route.action));
+  AppRoutes.forEach(route => {
+    route.middleware ? router[route.method as MethodType](route.path, ...route.middleware, route.action) :
+      router[route.method as MethodType](route.path, route.action);
+  });
 
   app.use(bodyParser());
   app.use(router.routes());

@@ -1,4 +1,4 @@
-import {Context} from 'koa';
+import {Context, Next} from 'koa';
 import {getManager} from 'typeorm';
 import {User} from '../entity/User';
 import {Code} from '../entity/Code';
@@ -41,6 +41,14 @@ class UserController {
     const {password: pwd, ...user} = _user;
     context.session!.user = user;
     context.body = user;
+  }
+
+  // 判断用户是否登录
+  async checkSession(context: Context, next: Next) {
+    if (!context.session?.user) {
+      context.throw(401, '用户未登录');
+    }
+    await next();
   }
 
   /**

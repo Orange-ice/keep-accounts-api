@@ -1,10 +1,12 @@
 import {welcome} from './controller/welcome';
 import CodeController from './controller/code';
 import UserController from './controller/user';
+import TagController from './controller/tag';
 
 const prefixMap = {
   code: '/code',
-  user: '/user'
+  user: '/user',
+  tag: '/tag'
 };
 
 export const AppRoutes = [
@@ -22,4 +24,15 @@ export const AppRoutes = [
   {path: `${prefixMap.user}/create`, method: 'post', action: UserController.createUser},
   // 用户登录
   {path: `${prefixMap.user}/login`, method: 'post', action: UserController.login},
+
+  /**
+   * Tag
+   * */
+  // 创建标签
+  {
+    path: `${prefixMap.tag}/create`,
+    method: 'post',
+    action: TagController.create,
+    middleware: [UserController.checkSession]
+  },
 ];

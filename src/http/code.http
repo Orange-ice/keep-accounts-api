@@ -25,6 +25,17 @@ POST http://{{host}}/user/login
 Content-Type: application/json
 
 {
-  "username": "admin",
+  "username": "sysadmin",
   "password": "123456"
+}
+
+
+### 创建标签
+POST http://{{host}}/tag/create
+Content-Type: application/json
+
+{
+  "label": "电子产品",
+  "icon": "shopping",
+  "type": 0
 }
