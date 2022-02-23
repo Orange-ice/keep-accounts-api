@@ -47,6 +47,20 @@ export const AppRoutes = [
     path: `${prefixMap.tag}/query/:id`,
     method: 'get',
     action: TagController.queryById,
-    middleware: [UserController.checkSession]
+    middleware: [UserController.checkSession, TagController.checkIfTagExist]
+  },
+  // 修改标签
+  {
+    path: `${prefixMap.tag}/update/:id`,
+    method: 'put',
+    action: TagController.update,
+    middleware: [UserController.checkSession, TagController.checkIfTagExist]
+  },
+  // 删除标签
+  {
+    path: `${prefixMap.tag}/remove/:id`,
+    method: 'delete',
+    action: TagController.remove,
+    middleware: [UserController.checkSession, TagController.checkIfTagExist]
   },
 ];

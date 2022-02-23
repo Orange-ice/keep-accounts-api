@@ -1,4 +1,4 @@
-import {Context} from 'koa';
+import {Context, Next} from 'koa';
 import {getManager} from 'typeorm';
 import {Tag} from '../entity/Tag';
 
@@ -26,9 +26,29 @@ class TagController {
   async queryById(context: Context) {
     const tagId = context.params.id;
     const tagRepository = getManager().getRepository(Tag);
+    context.body = await tagRepository.findOne({id: tagId});
+  }
+
+  async update(context: Context) {
+    const {id} = context.params;
+    const tagRepository = getManager().getRepository(Tag);
+    await tagRepository.update(id, {...context.request.body});
+    context.status = 204;
+  }
+
+  async remove(context: Context) {
+    const {id} = context.params;
+    const tagRepository = getManager().getRepository(Tag);
+    await tagRepository.delete(id);
+    context.status = 204;
+  }
+
+  async checkIfTagExist(context: Context, next: Next) {
+    const tagId = context.params.id;
+    const tagRepository = getManager().getRepository(Tag);
     const tag = await tagRepository.findOne({id: tagId});
     if (!tag) context.throw(400, '标签不存在');
-    context.body = tag;
+    await next();
   }
 }
 

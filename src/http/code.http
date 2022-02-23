@@ -49,3 +49,17 @@ Accept: application/json
 
 GET http://{{host}}/tag/query/6
 Accept: application/json
+
+### 修改标签
+PUT http://{{host}}/tag/update/6
+Content-Type: application/json
+
+{
+  "label": "电子产品2222",
+  "icon": "shopping",
+  "type": 0
+}
+
+### 删除标签
+DELETE http://{{host}}/tag/remove/6
+Accept: application/json
