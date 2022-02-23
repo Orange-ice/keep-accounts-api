@@ -45,3 +45,7 @@ Content-Type: application/json
 GET http://{{host}}/tag/query/all
 Accept: application/json
 
+### 获取标签 by id
+
+GET http://{{host}}/tag/query/6
+Accept: application/json

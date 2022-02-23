@@ -42,4 +42,11 @@ export const AppRoutes = [
     action: TagController.queryAll,
     middleware: [UserController.checkSession]
   },
+  // 通过 id 查询标签
+  {
+    path: `${prefixMap.tag}/query/:id`,
+    method: 'get',
+    action: TagController.queryById,
+    middleware: [UserController.checkSession]
+  },
 ];

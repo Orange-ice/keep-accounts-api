@@ -22,6 +22,14 @@ class TagController {
     const tagRepository = getManager().getRepository(Tag);
     context.body = await tagRepository.find({where: {user: context.session?.user}});
   }
+
+  async queryById(context: Context) {
+    const tagId = context.params.id;
+    const tagRepository = getManager().getRepository(Tag);
+    const tag = await tagRepository.findOne({id: tagId});
+    if (!tag) context.throw(400, '标签不存在');
+    context.body = tag;
+  }
 }
 
 export default new TagController();
