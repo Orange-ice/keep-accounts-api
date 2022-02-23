@@ -35,4 +35,11 @@ export const AppRoutes = [
     action: TagController.create,
     middleware: [UserController.checkSession]
   },
+  // 获取一个用户的所有标签
+  {
+    path: `${prefixMap.tag}/query/all`,
+    method: 'get',
+    action: TagController.queryAll,
+    middleware: [UserController.checkSession]
+  },
 ];

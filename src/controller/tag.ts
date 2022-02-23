@@ -17,6 +17,11 @@ class TagController {
     await tagRepository.save(newTag);
     context.body = newTag;
   }
+
+  async queryAll(context: Context) {
+    const tagRepository = getManager().getRepository(Tag);
+    context.body = await tagRepository.find({where: {user: context.session?.user}});
+  }
 }
 
 export default new TagController();

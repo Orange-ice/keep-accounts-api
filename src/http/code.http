@@ -39,3 +39,9 @@ Content-Type: application/json
   "icon": "shopping",
   "type": 0
 }
+
+### 获取用户所有标签
+
+GET http://{{host}}/tag/query/all
+Accept: application/json
+
