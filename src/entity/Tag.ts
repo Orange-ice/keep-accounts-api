@@ -4,9 +4,10 @@ import {
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
-  ManyToOne
+  ManyToOne, OneToMany
 } from 'typeorm';
 import {User} from './User';
+import {Record} from './Record';
 
 @Entity()
 export class Tag {
@@ -30,6 +31,9 @@ export class Tag {
 
   @ManyToOne(() => User, user => user.tags)
   user: User;
+
+  @OneToMany(() => Record, record => record.tag)
+  records: Record[];
 
   @CreateDateColumn()
   createdAt: Date;

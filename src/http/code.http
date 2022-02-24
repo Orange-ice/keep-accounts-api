@@ -63,3 +63,14 @@ Content-Type: application/json
 ### 删除标签
 DELETE http://{{host}}/tag/remove/6
 Accept: application/json
+
+### 添加记录
+POST http://{{host}}/record/create
+Content-Type: application/json
+
+{
+  "amount": "200",
+  "tagId": 6,
+  "type": 0,
+  "remark": "买无人机"
+}

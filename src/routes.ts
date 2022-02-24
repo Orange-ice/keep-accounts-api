@@ -2,11 +2,13 @@ import {welcome} from './controller/welcome';
 import CodeController from './controller/code';
 import UserController from './controller/user';
 import TagController from './controller/tag';
+import RecordController from './controller/record';
 
 const prefixMap = {
   code: '/code',
   user: '/user',
-  tag: '/tag'
+  tag: '/tag',
+  record: '/record'
 };
 
 export const AppRoutes = [
@@ -62,5 +64,15 @@ export const AppRoutes = [
     method: 'delete',
     action: TagController.remove,
     middleware: [UserController.checkSession, TagController.checkIfTagExist]
+  },
+  /**
+   * Record
+   * */
+  // 添加记录
+  {
+    path: `${prefixMap.record}/create`,
+    method: 'post',
+    action: RecordController.addRecord,
+    middleware: [UserController.checkSession]
   },
 ];
