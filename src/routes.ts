@@ -75,4 +75,11 @@ export const AppRoutes = [
     action: RecordController.addRecord,
     middleware: [UserController.checkSession]
   },
+  // 查询记录
+  {
+    path: `${prefixMap.record}/query`,
+    method: 'get',
+    action: RecordController.query,
+    middleware: [UserController.checkSession]
+  }
 ];

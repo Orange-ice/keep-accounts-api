@@ -1,5 +1,5 @@
 import {Context} from 'koa';
-import {getManager} from 'typeorm';
+import {Between, getManager} from 'typeorm';
 import {Record} from '../entity/Record';
 import {Tag} from '../entity/Tag';
 
@@ -16,6 +16,18 @@ class RecordController {
     });
     await recordRepository.save(record);
     context.body = record;
+  }
+
+  async query(context: Context) {
+    const {beginDate, endDate} = context.request.query;
+    // 默认查询当月的记录
+    const date = new Date();
+    const firstDay = new Date(date.getFullYear(), date.getMonth(), 1);
+    const recordRepository = getManager().getRepository(Record);
+    context.body = await recordRepository.find({
+      where: {createdAt: Between(beginDate || firstDay, endDate || new Date())},
+      order: {createdAt: 'DESC'}
+    });
   }
 }
 
